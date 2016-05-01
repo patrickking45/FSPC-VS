@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "420-476_VIVLIO", "420-476_VIVLIO\420-476_VIVLIO.csproj", "{67A601C5-F367-4294-A047-63E4C5CFCFCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "420-476_VIVLIO", "420-476_VIVLIO\420-476_VIVLIO.csproj", "{120A3CD9-F7C4-4BD9-BCF8-3CEB06ED468D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{67A601C5-F367-4294-A047-63E4C5CFCFCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67A601C5-F367-4294-A047-63E4C5CFCFCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67A601C5-F367-4294-A047-63E4C5CFCFCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67A601C5-F367-4294-A047-63E4C5CFCFCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{120A3CD9-F7C4-4BD9-BCF8-3CEB06ED468D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{120A3CD9-F7C4-4BD9-BCF8-3CEB06ED468D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{120A3CD9-F7C4-4BD9-BCF8-3CEB06ED468D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{120A3CD9-F7C4-4BD9-BCF8-3CEB06ED468D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
