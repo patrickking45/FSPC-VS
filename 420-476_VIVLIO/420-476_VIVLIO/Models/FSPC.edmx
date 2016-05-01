@@ -12,16 +12,13 @@
           <Property Name="MatiereID" Type="int" Nullable="false" />
           <Property Name="SubjectMatter" Type="nvarchar" MaxLength="25" Nullable="false" />
         </EntityType>
-        <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="Message">
           <Key>
-            <PropertyRef Name="SenderID" />
-            <PropertyRef Name="ReceiverID" />
-            <PropertyRef Name="Message" />
+            <PropertyRef Name="MessageID" />
           </Key>
-          <Property Name="SenderID" Type="int" Nullable="false" />
+          <Property Name="MessageID" Type="int" Nullable="false" />
           <Property Name="ReceiverID" Type="int" Nullable="false" />
+          <Property Name="SenderID" Type="int" Nullable="false" />
           <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Niveau">
@@ -128,16 +125,10 @@ avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire dé
         </Association>
         <EntityContainer Name="FSPCModelStoreContainer">
           <EntitySet Name="Matiere" EntityType="Self.Matiere" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Niveau" EntityType="Self.Niveau" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offer" EntityType="Self.Offer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Message" EntityType="Self.Message" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Message].[SenderID] AS [SenderID], 
-    [Message].[ReceiverID] AS [ReceiverID], 
-    [Message].[Message] AS [Message]
-    FROM [dbo].[Message] AS [Message]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_MatiereID" Association="Self.FK_MatiereID">
             <End Role="Matiere" EntitySet="Matiere" />
             <End Role="Offer" EntitySet="Offer" />
@@ -171,6 +162,17 @@ avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire dé
           <Property Name="MatiereID" Type="Int32" Nullable="false" />
           <Property Name="SubjectMatter" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Offer" Relationship="Self.FK_MatiereID" FromRole="Matiere" ToRole="Offer" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="Int32" Nullable="false" />
+          <Property Name="ReceiverID" Type="Int32" Nullable="false" />
+          <Property Name="SenderID" Type="Int32" Nullable="false" />
+          <Property Name="Message1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ReceiverID" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_SenderID" FromRole="Message" ToRole="User" />
         </EntityType>
         <EntityType Name="Niveau">
           <Key>
@@ -217,21 +219,9 @@ avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire dé
           <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Type" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Offer" Relationship="Self.FK_UserID" FromRole="User" ToRole="Offer" />
           <NavigationProperty Name="Message" Relationship="Self.FK_ReceiverID" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="Message1" Relationship="Self.FK_SenderID" FromRole="User" ToRole="Message" />
-        </EntityType>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="SenderID" />
-            <PropertyRef Name="ReceiverID" />
-            <PropertyRef Name="Message1" />
-          </Key>
-          <Property Name="SenderID" Type="Int32" Nullable="false" />
-          <Property Name="ReceiverID" Type="Int32" Nullable="false" />
-          <Property Name="Message1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_ReceiverID" FromRole="Message" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="Self.FK_SenderID" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="Offer" Relationship="Self.FK_UserID" FromRole="User" ToRole="Offer" />
         </EntityType>
         <Association Name="FK_MatiereID">
           <End Role="Matiere" Type="Self.Matiere" Multiplicity="1" />
@@ -242,30 +232,6 @@ avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire dé
             </Principal>
             <Dependent Role="Offer">
               <PropertyRef Name="MatiereID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NiveauID">
-          <End Role="Niveau" Type="Self.Niveau" Multiplicity="1" />
-          <End Role="Offer" Type="Self.Offer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Niveau">
-              <PropertyRef Name="NiveauID" />
-            </Principal>
-            <Dependent Role="Offer">
-              <PropertyRef Name="NiveauID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserID">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Offer" Type="Self.Offer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Offer">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -293,22 +259,38 @@ avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire dé
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NiveauID">
+          <End Role="Niveau" Type="Self.Niveau" Multiplicity="1" />
+          <End Role="Offer" Type="Self.Offer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Niveau">
+              <PropertyRef Name="NiveauID" />
+            </Principal>
+            <Dependent Role="Offer">
+              <PropertyRef Name="NiveauID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserID">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Offer" Type="Self.Offer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Offer">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="FSPCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Matiere" EntityType="Self.Matiere" />
+          <EntitySet Name="Message" EntityType="Self.Message" />
           <EntitySet Name="Niveau" EntityType="Self.Niveau" />
           <EntitySet Name="Offer" EntityType="Self.Offer" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <EntitySet Name="Message" EntityType="Self.Message" />
           <AssociationSet Name="FK_MatiereID" Association="Self.FK_MatiereID">
             <End Role="Matiere" EntitySet="Matiere" />
-            <End Role="Offer" EntitySet="Offer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NiveauID" Association="Self.FK_NiveauID">
-            <End Role="Niveau" EntitySet="Niveau" />
-            <End Role="Offer" EntitySet="Offer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserID" Association="Self.FK_UserID">
-            <End Role="User" EntitySet="User" />
             <End Role="Offer" EntitySet="Offer" />
           </AssociationSet>
           <AssociationSet Name="FK_ReceiverID" Association="Self.FK_ReceiverID">
@@ -318,6 +300,14 @@ avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire dé
           <AssociationSet Name="FK_SenderID" Association="Self.FK_SenderID">
             <End Role="User" EntitySet="User" />
             <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NiveauID" Association="Self.FK_NiveauID">
+            <End Role="Niveau" EntitySet="Niveau" />
+            <End Role="Offer" EntitySet="Offer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserID" Association="Self.FK_UserID">
+            <End Role="User" EntitySet="User" />
+            <End Role="Offer" EntitySet="Offer" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -331,6 +321,16 @@ avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire dé
               <MappingFragment StoreEntitySet="Matiere">
                 <ScalarProperty Name="MatiereID" ColumnName="MatiereID" />
                 <ScalarProperty Name="SubjectMatter" ColumnName="SubjectMatter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="FSPCModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
+                <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+                <ScalarProperty Name="Message1" ColumnName="Message" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -379,15 +379,6 @@ avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire dé
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Message">
-            <EntityTypeMapping TypeName="FSPCModel.Message">
-              <MappingFragment StoreEntitySet="Message">
-                <ScalarProperty Name="SenderID" ColumnName="SenderID" />
-                <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
-                <ScalarProperty Name="Message1" ColumnName="Message" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -405,7 +396,7 @@ avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire dé
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

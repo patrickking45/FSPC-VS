@@ -9,6 +9,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Message">
+      <EntityTypeMapping TypeName="FSPCModel.Message">
+        <MappingFragment StoreEntitySet="Message">
+          <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+          <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
+          <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+          <ScalarProperty Name="Message1" ColumnName="Message" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Niveau">
       <EntityTypeMapping TypeName="FSPCModel.Niveau">
         <MappingFragment StoreEntitySet="Niveau">
@@ -51,15 +61,6 @@
           <ScalarProperty Name="Prenom" ColumnName="Prenom" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="Type" ColumnName="Type" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Message">
-      <EntityTypeMapping TypeName="FSPCModel.Message">
-        <MappingFragment StoreEntitySet="Message">
-          <ScalarProperty Name="SenderID" ColumnName="SenderID" />
-          <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
-          <ScalarProperty Name="Message1" ColumnName="Message" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

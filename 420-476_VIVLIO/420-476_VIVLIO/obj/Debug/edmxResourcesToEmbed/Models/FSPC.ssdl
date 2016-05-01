@@ -7,16 +7,13 @@
     <Property Name="MatiereID" Type="int" Nullable="false" />
     <Property Name="SubjectMatter" Type="nvarchar" MaxLength="25" Nullable="false" />
   </EntityType>
-  <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
   <EntityType Name="Message">
     <Key>
-      <PropertyRef Name="SenderID" />
-      <PropertyRef Name="ReceiverID" />
-      <PropertyRef Name="Message" />
+      <PropertyRef Name="MessageID" />
     </Key>
-    <Property Name="SenderID" Type="int" Nullable="false" />
+    <Property Name="MessageID" Type="int" Nullable="false" />
     <Property Name="ReceiverID" Type="int" Nullable="false" />
+    <Property Name="SenderID" Type="int" Nullable="false" />
     <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Niveau">
@@ -123,16 +120,10 @@ avertissement 6002: La table/vue 'FSPC.dbo.Message' n'a pas de clé primaire dé
   </Association>
   <EntityContainer Name="FSPCModelStoreContainer">
     <EntitySet Name="Matiere" EntityType="Self.Matiere" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Niveau" EntityType="Self.Niveau" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Offer" EntityType="Self.Offer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Message" EntityType="Self.Message" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Message].[SenderID] AS [SenderID], 
-    [Message].[ReceiverID] AS [ReceiverID], 
-    [Message].[Message] AS [Message]
-    FROM [dbo].[Message] AS [Message]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_MatiereID" Association="Self.FK_MatiereID">
       <End Role="Matiere" EntitySet="Matiere" />
       <End Role="Offer" EntitySet="Offer" />

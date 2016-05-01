@@ -8,6 +8,17 @@
     <Property Name="SubjectMatter" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Offer" Relationship="Self.FK_MatiereID" FromRole="Matiere" ToRole="Offer" />
   </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageID" />
+    </Key>
+    <Property Name="MessageID" Type="Int32" Nullable="false" />
+    <Property Name="ReceiverID" Type="Int32" Nullable="false" />
+    <Property Name="SenderID" Type="Int32" Nullable="false" />
+    <Property Name="Message1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_ReceiverID" FromRole="Message" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="Self.FK_SenderID" FromRole="Message" ToRole="User" />
+  </EntityType>
   <EntityType Name="Niveau">
     <Key>
       <PropertyRef Name="NiveauID" />
@@ -53,21 +64,9 @@
     <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="Type" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Offer" Relationship="Self.FK_UserID" FromRole="User" ToRole="Offer" />
     <NavigationProperty Name="Message" Relationship="Self.FK_ReceiverID" FromRole="User" ToRole="Message" />
     <NavigationProperty Name="Message1" Relationship="Self.FK_SenderID" FromRole="User" ToRole="Message" />
-  </EntityType>
-  <EntityType Name="Message">
-    <Key>
-      <PropertyRef Name="SenderID" />
-      <PropertyRef Name="ReceiverID" />
-      <PropertyRef Name="Message1" />
-    </Key>
-    <Property Name="SenderID" Type="Int32" Nullable="false" />
-    <Property Name="ReceiverID" Type="Int32" Nullable="false" />
-    <Property Name="Message1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="Self.FK_ReceiverID" FromRole="Message" ToRole="User" />
-    <NavigationProperty Name="User1" Relationship="Self.FK_SenderID" FromRole="Message" ToRole="User" />
+    <NavigationProperty Name="Offer" Relationship="Self.FK_UserID" FromRole="User" ToRole="Offer" />
   </EntityType>
   <Association Name="FK_MatiereID">
     <End Role="Matiere" Type="Self.Matiere" Multiplicity="1" />
@@ -78,30 +77,6 @@
       </Principal>
       <Dependent Role="Offer">
         <PropertyRef Name="MatiereID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_NiveauID">
-    <End Role="Niveau" Type="Self.Niveau" Multiplicity="1" />
-    <End Role="Offer" Type="Self.Offer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Niveau">
-        <PropertyRef Name="NiveauID" />
-      </Principal>
-      <Dependent Role="Offer">
-        <PropertyRef Name="NiveauID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserID">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Offer" Type="Self.Offer" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserID" />
-      </Principal>
-      <Dependent Role="Offer">
-        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -129,22 +104,38 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_NiveauID">
+    <End Role="Niveau" Type="Self.Niveau" Multiplicity="1" />
+    <End Role="Offer" Type="Self.Offer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Niveau">
+        <PropertyRef Name="NiveauID" />
+      </Principal>
+      <Dependent Role="Offer">
+        <PropertyRef Name="NiveauID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserID">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Offer" Type="Self.Offer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Offer">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="FSPCEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Matiere" EntityType="Self.Matiere" />
+    <EntitySet Name="Message" EntityType="Self.Message" />
     <EntitySet Name="Niveau" EntityType="Self.Niveau" />
     <EntitySet Name="Offer" EntityType="Self.Offer" />
     <EntitySet Name="User" EntityType="Self.User" />
-    <EntitySet Name="Message" EntityType="Self.Message" />
     <AssociationSet Name="FK_MatiereID" Association="Self.FK_MatiereID">
       <End Role="Matiere" EntitySet="Matiere" />
-      <End Role="Offer" EntitySet="Offer" />
-    </AssociationSet>
-    <AssociationSet Name="FK_NiveauID" Association="Self.FK_NiveauID">
-      <End Role="Niveau" EntitySet="Niveau" />
-      <End Role="Offer" EntitySet="Offer" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UserID" Association="Self.FK_UserID">
-      <End Role="User" EntitySet="User" />
       <End Role="Offer" EntitySet="Offer" />
     </AssociationSet>
     <AssociationSet Name="FK_ReceiverID" Association="Self.FK_ReceiverID">
@@ -154,6 +145,14 @@
     <AssociationSet Name="FK_SenderID" Association="Self.FK_SenderID">
       <End Role="User" EntitySet="User" />
       <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NiveauID" Association="Self.FK_NiveauID">
+      <End Role="Niveau" EntitySet="Niveau" />
+      <End Role="Offer" EntitySet="Offer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserID" Association="Self.FK_UserID">
+      <End Role="User" EntitySet="User" />
+      <End Role="Offer" EntitySet="Offer" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

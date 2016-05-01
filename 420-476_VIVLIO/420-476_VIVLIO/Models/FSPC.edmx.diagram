@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a862c47b708e4a27b4a01502ee36d38e" Name="Diagram1">
-        <EntityTypeShape EntityType="FSPCModel.Matiere" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FSPCModel.Niveau" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FSPCModel.Offer" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FSPCModel.User" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FSPCModel.Message" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+      <Diagram DiagramId="664fff7e58af4ed4a887785f111bbde0" Name="Diagram1">
+        <EntityTypeShape EntityType="FSPCModel.Matiere" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSPCModel.Message" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSPCModel.Niveau" Width="1.5" PointX="3.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSPCModel.Offer" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FSPCModel.User" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
         <AssociationConnector Association="FSPCModel.FK_MatiereID" ManuallyRouted="false" />
-        <AssociationConnector Association="FSPCModel.FK_NiveauID" ManuallyRouted="false" />
-        <AssociationConnector Association="FSPCModel.FK_UserID" ManuallyRouted="false" />
         <AssociationConnector Association="FSPCModel.FK_ReceiverID" ManuallyRouted="false" />
         <AssociationConnector Association="FSPCModel.FK_SenderID" ManuallyRouted="false" />
+        <AssociationConnector Association="FSPCModel.FK_NiveauID" ManuallyRouted="false" />
+        <AssociationConnector Association="FSPCModel.FK_UserID" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
