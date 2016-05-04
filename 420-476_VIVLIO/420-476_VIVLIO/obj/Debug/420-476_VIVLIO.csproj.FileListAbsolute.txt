@@ -180,3 +180,4 @@ D:\Me\Documents\VIVLIO\FSPC-VS\420-476_VIVLIO\420-476_VIVLIO\bin\Microsoft.Owin.
 D:\Me\Documents\VIVLIO\FSPC-VS\420-476_VIVLIO\420-476_VIVLIO\obj\Debug\420-476_VIVLIO.csprojResolveAssemblyReference.cache
 D:\Me\Documents\VIVLIO\FSPC-VS\420-476_VIVLIO\420-476_VIVLIO\obj\Debug\420-476_VIVLIO.dll
 D:\Me\Documents\VIVLIO\FSPC-VS\420-476_VIVLIO\420-476_VIVLIO\obj\Debug\420-476_VIVLIO.pdb
+C:\Users\Patrick\Documents\ProjetASP\FSPC-VS\420-476_VIVLIO\420-476_VIVLIO\obj\Debug\420-476_VIVLIO.csprojResolveAssemblyReference.cache
