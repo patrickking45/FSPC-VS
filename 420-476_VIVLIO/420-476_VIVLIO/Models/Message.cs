@@ -18,6 +18,7 @@ namespace _420_476_VIVLIO.Models
         public int ReceiverID { get; set; }
         public int SenderID { get; set; }
         public string Message1 { get; set; }
+        public string Status { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

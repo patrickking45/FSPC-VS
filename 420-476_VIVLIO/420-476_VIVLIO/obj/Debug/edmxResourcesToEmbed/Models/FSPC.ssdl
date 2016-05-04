@@ -14,6 +14,7 @@
     <Property Name="MessageID" Type="int" Nullable="false" />
     <Property Name="ReceiverID" Type="int" Nullable="false" />
     <Property Name="SenderID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="6" Nullable="false" />
     <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Niveau">

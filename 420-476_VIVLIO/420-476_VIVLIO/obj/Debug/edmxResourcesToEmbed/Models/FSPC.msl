@@ -12,6 +12,7 @@
     <EntitySetMapping Name="Message">
       <EntityTypeMapping TypeName="FSPCModel.Message">
         <MappingFragment StoreEntitySet="Message">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="MessageID" ColumnName="MessageID" />
           <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
           <ScalarProperty Name="SenderID" ColumnName="SenderID" />

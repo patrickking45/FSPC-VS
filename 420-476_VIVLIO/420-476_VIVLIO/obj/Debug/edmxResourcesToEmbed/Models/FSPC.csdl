@@ -18,6 +18,7 @@
     <Property Name="Message1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="User" Relationship="Self.FK_ReceiverID" FromRole="Message" ToRole="User" />
     <NavigationProperty Name="User1" Relationship="Self.FK_SenderID" FromRole="Message" ToRole="User" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Niveau">
     <Key>
